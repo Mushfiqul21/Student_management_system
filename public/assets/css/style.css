@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#sidebar{
+    background: #212529;
+    margin-top: -8px;
+    height: 90vh;
+}
+#sidebar li a{
+    text-decoration: none;
+    color: white;
+}
+#sidebar li{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    transition: 0.3s;
+}
+#sidebar li:hover{
+    background: white;
+}
+#sidebar li:hover a{
+    color: #212529;
+}
+.active{
+    background: white;
+    color: #212529;
+}
+
+
