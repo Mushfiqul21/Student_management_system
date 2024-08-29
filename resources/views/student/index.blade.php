@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Student Management System')
+@section('title', 'Student Information')
 
 @include('layout.header')
 
