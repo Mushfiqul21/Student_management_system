@@ -11,6 +11,11 @@
             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add Student</button>
         </div>
         <hr>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         {{--Student List--}}
         <div>
             <table class="table" id="studentTable">

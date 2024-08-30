@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use DataTables;
 
 class StudentController extends Controller
 {
@@ -14,7 +13,7 @@ class StudentController extends Controller
         if ($request->ajax()) {
             try {
                 $data = Student::select(['id', 'name', 'image', 'class', 'phone']);
-                return DataTables::of($data)
+                return datatables($data)
                     ->addIndexColumn()
                     ->addColumn('image', function($data) {
                         $imagePath = asset('assets/images/' . $data->image);

@@ -15,7 +15,7 @@
                         <h4>Total students</h4>
                     </div>
                     <div class="card-body">
-                        <p>100</p>
+                        <p>{{$totalStudents}}</p>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <h4>Total Teachers</h4>
                     </div>
                     <div class="card-body">
-                        <p>20</p>
+                        <p>{{$totalTeachers}}</p>
                     </div>
                 </div>
             </div>

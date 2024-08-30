@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
+Route::get('/',[DashboardController::class,'dashboard'])->name('dashboard');
 Route::group(['prefix'=>'student', 'as'=>'student.'],function(){
     Route::get('/', [StudentController::class, 'index'])->name('index');
     Route::post('store', [StudentController::class, 'store'])->name('store');
