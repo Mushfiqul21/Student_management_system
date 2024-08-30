@@ -53,4 +53,41 @@ class TeacherController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
     }
+
+    public function update(Request $request, $id){
+        try {
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $teacherData = Teacher::find(decrypt($id));
+            $teacherData->name = $request->name;
+            $teacherData->email = $request->email;
+            $teacherData->Designation = $request->designation;
+            $teacherData->phone = $request->phone;
+            if($request->hasFile('image')){
+                if ($teacherData->image != null)
+                {
+                    $publicPath= public_path('assets/images/').$teacherData->image;
+                    if(File::exists($publicPath)) {
+                        unlink($publicPath);
+                    }
+                    $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                    $request->image->move(public_path('assets/images/'), $imageName);
+                    $teacherData->image = $imageName;
+                }
+                else{
+                    $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                    $request->image->move(public_path('assets/images/'), $imageName);
+                    $teacherData->image = $imageName;
+                }
+
+            }
+            $teacherData->save();
+            return redirect()->route('teacher.index')->with('success', 'Teacher Updated Successfully');
+        }catch (\Exception $e){
+            $errors = $e->errors();
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+    }
 }

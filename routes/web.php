@@ -29,7 +29,6 @@ Route::group(['prefix'=>'student', 'as'=>'student.'],function(){
 Route::group(['prefix'=>'teacher', 'as'=>'teacher.'],function(){
     Route::get('/', [TeacherController::class, 'index'])->name('index');
     Route::post('store', [TeacherController::class, 'store'])->name('store');
-    Route::get('edit', [TeacherController::class, 'edit'])->name('edit');
     Route::post('update/{id?}', [TeacherController::class, 'update'])->name('update');
     Route::get('view/{id?}', [TeacherController::class, 'view'])->name('view');
     Route::get('delete/{id?}', [TeacherController::class, 'delete'])->name('delete');
