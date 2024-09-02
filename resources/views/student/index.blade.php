@@ -103,6 +103,14 @@
                                 <label for="guardian_phone" class="col-form-label">Guardian Phone Number:</label>
                                 <input type="number" class="form-control" id="guardian_phone" name="guardian_phone" placeholder="Enter Student Guardian Phone NUmber">
                             </div>
+                            <div class="mb-3">
+                                <label for="guardian_phone" class="col-form-label">Student Status:</label>
+                                <select name="class" id="class" class="form-select" required>
+                                    <option selected disabled>Status</option>
+                                    <option value="present">Present</option>
+                                    <option value="absent">Absent</option>
+                                </select>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-dark">Save</button>

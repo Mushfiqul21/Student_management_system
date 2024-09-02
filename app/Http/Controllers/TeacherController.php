@@ -20,7 +20,7 @@ class TeacherController extends Controller
               'email' => 'required|email',
               'designation' => 'required',
               'phone' => 'required',
-              'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+              'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
           ]);
 
           $teacherData = new Teacher();
@@ -60,7 +60,7 @@ class TeacherController extends Controller
                 'name' => 'required',
             ]);
 
-            $teacherData = Teacher::find(decrypt($id));
+            $teacherData = Teacher::find($id);
             $teacherData->name = $request->name;
             $teacherData->email = $request->email;
             $teacherData->Designation = $request->designation;
@@ -88,6 +88,25 @@ class TeacherController extends Controller
         }catch (\Exception $e){
             $errors = $e->errors();
             return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+    }
+
+    public function view($id){
+        $data['teacher'] = Teacher::find(decrypt($id));
+        return view('teacher.view', $data);
+    }
+
+    public function delete($id)
+    {
+        try {
+            $teacher = Teacher::find(decrypt($id));
+            if (is_null($teacher)) {
+                return redirect()->back()->with('error', 'Teacher Not Found');
+            }
+            $teacher->delete();
+            return redirect()->route('teacher.index')->with('success', 'Teacher Deleted Successfully');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 }
