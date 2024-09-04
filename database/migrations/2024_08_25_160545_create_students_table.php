@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('class')->nullable();
+            $table->unsignedBigInteger('classroom_id');
             $table->string('gender')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('guardian_name')->nullable();
             $table->string('guardian_phone')->nullable();
+            $table->enum('status', ['present', 'absent'])->nullable();
             $table->timestamps();
         });
     }

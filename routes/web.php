@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,6 @@ Route::group(['prefix'=>'teacher', 'as'=>'teacher.'],function(){
     Route::get('view/{id?}', [TeacherController::class, 'view'])->name('view');
     Route::get('delete/{id?}', [TeacherController::class, 'delete'])->name('delete');
 });
+
+Route::get('attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 

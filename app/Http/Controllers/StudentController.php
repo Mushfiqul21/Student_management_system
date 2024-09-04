@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -10,14 +11,18 @@ class StudentController extends Controller
 {
     public function index(Request $request)
     {
+        $data['classrooms'] = Classroom::all();
         if ($request->ajax()) {
             try {
-                $data = Student::select(['id', 'name', 'image', 'class', 'phone']);
+                $data = Student::with('classroom')->select(['id', 'name', 'image', 'classroom_id', 'phone']);
                 return datatables($data)
                     ->addIndexColumn()
                     ->addColumn('image', function($data) {
                         $imagePath = asset('assets/images/' . $data->image);
                         return '<img src="' . $imagePath . '" alt="Image" class="img-fluid" style="max-width: 60px; height: 30px;">';
+                    })
+                    ->addColumn('class', function($data) {
+                        return $data->classroom ? $data->classroom->name : 'N/A';
                     })
                     ->addColumn('action', function($data) {
                         return '<div class="d-flex justify-content-start gap-1">
@@ -42,7 +47,7 @@ class StudentController extends Controller
             }
         }
 
-        return view('student.index');
+        return view('student.index',$data);
     }
 
 
@@ -50,18 +55,18 @@ class StudentController extends Controller
         try {
             $this->validate($request, [
                 'name' => 'required',
-                'class' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'classroom_id' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'gender' => 'required',
-                'address' => 'required',
-                'phone' => 'required',
-                'dob' => 'required|before:today',
-                'guardian_name' => 'required',
-                'guardian_phone' => 'required',
+//                'address' => 'required',
+//                'phone' => 'required',
+//                'dob' => 'required|before:today',
+//                'guardian_name' => 'required',
+//                'guardian_phone' => 'required',
             ]);
             $studentData = new Student();
             $studentData->name = $request->name;
-            $studentData->class = $request->class;
+            $studentData->classroom_id = $request->classroom_id;
             $studentData->gender = $request->gender;
             $studentData->address = $request->address;
             $studentData->phone = $request->phone;
@@ -98,6 +103,8 @@ class StudentController extends Controller
     {
         if ($request->ajax()) {
             $data['student'] = Student::find(decrypt($request->id));
+            $data['classrooms']= Classroom::all();
+
             return view('student.edit', $data)->render();
         }
     }
@@ -109,7 +116,7 @@ class StudentController extends Controller
             ]);
             $studentData = Student::find(decrypt($id));
             $studentData->name = $request->name;
-            $studentData->class = $request->class;
+            $studentData->classroom_id = $request->classroom_id;
             $studentData->gender = $request->gender;
             $studentData->address = $request->address;
             $studentData->phone = $request->phone;

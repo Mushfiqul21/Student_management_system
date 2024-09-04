@@ -4,7 +4,7 @@
         <li class="nav-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
         <li class="nav-item"><a href="{{ route('student.index') }}">Student</a></li>
         <li class="nav-item"><a href="{{ route('teacher.index') }}">Teacher</a></li>
-        <li class="nav-item"><a href="">Attendance</a></li>
+        <li class="nav-item"><a href="{{route('attendance.index')}}">Attendance</a></li>
     </ul>
 </div>
 

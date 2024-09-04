@@ -32,22 +32,20 @@
         <!-- Class Field -->
         <div class="mb-3">
             <label for="class" class="form-label">Class</label>
-            <select class="form-select @error('class') is-invalid @enderror" name="class" id="class">
-                <option value="3" {{ $student?->class == 3 ? 'selected' : '' }}>3</option>
-                <option value="4" {{ $student?->class == 4 ? 'selected' : '' }}>4</option>
-                <option value="5" {{ $student?->class == 5 ? 'selected' : '' }}>5</option>
-                <option value="6" {{ $student?->class == 6 ? 'selected' : '' }}>6</option>
-                <option value="7" {{ $student?->class == 7 ? 'selected' : '' }}>7</option>
-                <option value="8" {{ $student?->class == 8 ? 'selected' : '' }}>8</option>
-                <option value="9" {{ $student?->class == 9 ? 'selected' : '' }}>9</option>
-                <option value="10" {{ $student?->class == 10 ? 'selected' : '' }}>10</option>
+            <select class="form-select @error('class') is-invalid @enderror" name="classroom_id" id="class">
+                @foreach ($classrooms as $classroom)
+                    <option value="{{ $classroom->id }}" {{ $student?->classroom_id == $classroom->id ? 'selected' : '' }}>
+                        {{ $classroom->name }}
+                    </option>
+                @endforeach
             </select>
-            @error('class')
+            @error('classroom_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
+
 
         <!-- phone Field -->
         <div class="mb-3">

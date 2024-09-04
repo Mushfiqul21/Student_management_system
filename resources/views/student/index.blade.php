@@ -49,19 +49,15 @@
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter Student Name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="col-form-label">Class:</label>
-                                <select name="class" id="class" class="form-select" required>
+                                <label for="classroom_id" class="col-form-label">Class:</label>
+                                <select name="classroom_id" id="classroom_id" class="form-select" required>
                                     <option selected disabled>Select Student Class</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    @foreach($classrooms as $classroom)
+                                        <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <label for="image" class="col-form-label">Picture:</label>
                                 <input type="file" class="form-control" id="image" name="image">
@@ -105,7 +101,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="guardian_phone" class="col-form-label">Student Status:</label>
-                                <select name="class" id="class" class="form-select" required>
+                                <select name="status" id="status" class="form-select" required>
                                     <option selected disabled>Status</option>
                                     <option value="present">Present</option>
                                     <option value="absent">Absent</option>
