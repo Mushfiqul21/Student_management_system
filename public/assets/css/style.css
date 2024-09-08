@@ -5,7 +5,7 @@ body{
 #sidebar{
     background: #212529;
     margin-top: -8px;
-    height: 90vh;
+    height: 100vh;
 }
 #sidebar li a{
     text-decoration: none;

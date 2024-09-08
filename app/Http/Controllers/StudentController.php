@@ -73,6 +73,7 @@ class StudentController extends Controller
             $studentData->dob = $request->dob;
             $studentData->guardian_name = $request->guardian_name;
             $studentData->guardian_phone = $request->guardian_phone;
+            $studentData->status = $request->status;
             if($request->hasFile('image')){
                 if ($studentData->image != null)
                 {
@@ -123,6 +124,7 @@ class StudentController extends Controller
             $studentData->dob = $request->dob;
             $studentData->guardian_name = $request->guardian_name;
             $studentData->guardian_phone = $request->guardian_phone;
+            $studentData->status = $request->status;
             if($request->hasFile('image')){
                 if ($studentData->image != null)
                 {
