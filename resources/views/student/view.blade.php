@@ -24,7 +24,7 @@
                         </tr>
                         <tr>
                             <td class="px-2 py-1">Student Class: </td>
-                            <td>{{ $student?->class }}</td>
+                            <td>{{ $student?->classroom->name }}</td>
                         </tr>
                         <tr>
                             <td class="px-2 py-1">Student Phone: </td>
